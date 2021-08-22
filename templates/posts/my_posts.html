@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<title>
+{% block title %}
+Посты {{ request.user.username }}
+{% endblock %}
+</title>
+
+{% block content %}
+
+
+{% for post in posts %}
+
+    <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+        <h2>{{post.title}}</h2>
+        <h4 class="mb-0">Автор:{{post.author}}</h3>
+        <div class="mb-1 text-muted">{{post.creation_date}}</div>
+        <p class="card-text mb-auto">{{post.body}}</p>
+        <a href="{% url 'post_detail' pk=post.pk %}" class="stretched-link">Читать полностью</a>
+    </div>
+    </div>
+    <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary" href="{% url 'new_post' %}">создать пост</a>
+      </nav>
+{% endfor %}
+
+{% endblock %}
